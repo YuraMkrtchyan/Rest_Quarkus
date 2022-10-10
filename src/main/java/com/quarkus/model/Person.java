@@ -1,11 +1,17 @@
-package com.quarkus;
+package com.quarkus.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.quarkus.Status;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Data
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "person")
 public class Person {
     @Id
@@ -20,45 +26,12 @@ public class Person {
     private LocalDate birth;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Person(String name, LocalDate birth, Status status) {
-    }
-
-    public Person() {
-
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDate getBirth() {
-        return birth;
-    }
-
-    public void setBirth(LocalDate birth) {
         this.birth = birth;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
         this.status = status;
     }
 
